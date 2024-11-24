@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import api from '../utils/api';
-import styled from 'styled-components';
-import { Recipe } from '../types'; // Import the Recipe type from your types file
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import api from "../utils/api";
+import styled from "styled-components";
+import { Recipe } from "../types"; // Import the Recipe type from your types file
 
 // Styled components
 const DetailContainer = styled.div`
@@ -59,14 +59,15 @@ const RecipeDetail: React.FC = () => {
   useEffect(() => {
     if (id) {
       // Fetch the recipe details from the API
-      api.get(`/recipes/${id}`)
+      api
+        .get(`/recipes/${id}`)
         .then((response) => {
           setRecipe(response.data);
           setLoading(false);
         })
         .catch((error) => {
-          console.error('Error fetching recipe details:', error);
-          setError('Failed to fetch recipe details');
+          console.error("Error fetching recipe details:", error);
+          setError("Failed to fetch recipe details");
           setLoading(false);
         });
     }
@@ -87,13 +88,19 @@ const RecipeDetail: React.FC = () => {
   return (
     <DetailContainer>
       <Title>{recipe.title}</Title>
-      <Image src={recipe.image || 'placeholder.jpg'} alt={recipe.title} />
-      
+      <Image src={recipe.image || "placeholder.jpg"} alt={recipe.title} />
+
       <h3>Ingredients</h3>
       <IngredientsList>
-        {recipe.ingredients.map((ingredient, index) => (
-          <Ingredient key={index}>{ingredient}</Ingredient>
-        ))}
+        {Array.isArray(recipe.ingredients) ? (
+          recipe.ingredients.map((ingredient, index) => (
+            <Ingredient key={index}>{ingredient}</Ingredient>
+          ))
+        ) : (
+          <Ingredient>
+            {recipe.ingredients || "No ingredients available"}
+          </Ingredient>
+        )}
       </IngredientsList>
 
       <h3>Instructions</h3>

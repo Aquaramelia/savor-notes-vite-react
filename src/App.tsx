@@ -5,6 +5,7 @@ import GlobalStyles from './styles/globalStyles';
 import Header from './components/Header';
 import Home from './pages/Home';
 import RecipeDetail from './pages/RecipeDetail';
+import Login from './components/Login';
 
 const lightTheme = { 
   background: '#FFF4E0', 
@@ -32,7 +33,8 @@ function App() {
         <Header toggleTheme={toggleTheme} />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/recipe/:id" element={<RecipeDetail />} /> {/* RecipeDetail route */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/recipes/:id" element={<RecipeDetail />} /> {/* RecipeDetail route */}
         </Routes>
       </Router>
     </ThemeProvider>

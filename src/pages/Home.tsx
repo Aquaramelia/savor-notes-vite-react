@@ -15,11 +15,11 @@ const Home: React.FC = () => {
       .get("/recipes") // Ensure the endpoint matches the Rails route
       .then((response) => {
         // Transform the response to match the expected data structure
-        const fetchedRecipes = Array.isArray(response.data)
+        const fetchedRecipes: Recipe[] = Array.isArray(response.data)
           ? response.data.map((item) => ({
               id: String(item.id),
               title: item.title,
-              image: item.image,
+              images: item.image ? [item.image] : [], // Wrap the image URL into an array
               ingredients: item.ingredients || [],
               instructions: item.instructions || "",
             }))

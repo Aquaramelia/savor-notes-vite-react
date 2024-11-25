@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { data, useParams } from "react-router-dom";
 import api from "../utils/api";
 import styled from "styled-components";
 import { Recipe } from "../types"; // Import the Recipe type from your types file
@@ -88,7 +88,20 @@ const RecipeDetail: React.FC = () => {
   return (
     <DetailContainer>
       <Title>{recipe.title}</Title>
-      <Image src={recipe.image || "placeholder.jpg"} alt={recipe.title} />
+      <div className="image-gallery">
+        {recipe.images.map((image, index) => {
+          const url =
+            image instanceof File ? URL.createObjectURL(image) : image;
+          return (
+            <img
+              key={index}
+              src={url}
+              alt={`${recipe.title} - Image ${index + 1}`}
+              className="image-gallery"
+            />
+          );
+        })}
+      </div>
 
       <h3>Ingredients</h3>
       <IngredientsList>
@@ -102,7 +115,6 @@ const RecipeDetail: React.FC = () => {
           </Ingredient>
         )}
       </IngredientsList>
-
       <h3>Instructions</h3>
       <Instructions>{recipe.instructions}</Instructions>
     </DetailContainer>

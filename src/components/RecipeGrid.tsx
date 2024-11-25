@@ -1,9 +1,10 @@
 // src/components/RecipeGrid.tsx
 
-import React from 'react';
-import styled from 'styled-components';
-import RecipeCard from './RecipeCard';
-import { Recipe } from '../types'; // Import Recipe interface
+import React from "react";
+import styled from "styled-components";
+import RecipeCard from "./RecipeCard";
+import { Recipe } from "../types"; // Import Recipe interface
+import { Link } from "react-router-dom";
 
 const Grid = styled.div`
   display: grid;
@@ -18,13 +19,19 @@ interface RecipeGridProps {
 
 const RecipeGrid: React.FC<RecipeGridProps> = ({ recipes }) => {
   if (recipes.length === 0) {
-    return <div>No recipes available. Try again later.</div>;  // Gracefully handle empty recipes list
+    return <div>No recipes available. Try again later.</div>; // Gracefully handle empty recipes list
   }
 
   return (
     <Grid>
       {recipes.map((recipe) => (
-        <RecipeCard key={recipe.id} recipe={recipe} />
+        <Link
+          key={recipe.id}
+          to={`/recipes/${recipe.id}`}
+          style={{ textDecoration: "none" }}
+        >
+          <RecipeCard recipe={recipe} />
+        </Link>
       ))}
     </Grid>
   );

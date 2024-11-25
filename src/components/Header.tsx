@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import ThemeToggle from './ThemeToggle';
+import React from "react";
+import styled from "styled-components";
+import ThemeToggle from "./ThemeToggle";
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -12,7 +12,7 @@ const HeaderContainer = styled.header`
 `;
 
 const Title = styled.h1`
-  font-family: 'Merriweather', serif;
+  font-family: "Merriweather", serif;
 `;
 
 interface HeaderProps {
@@ -22,7 +22,9 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ toggleTheme }) => {
   return (
     <HeaderContainer>
-      <Title>SavorNotes</Title>
+      <a href="/">
+        <Title>SavorNotes</Title>
+      </a>
       <ThemeToggle toggleTheme={toggleTheme} />
     </HeaderContainer>
   );

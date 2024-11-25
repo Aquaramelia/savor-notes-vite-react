@@ -8,6 +8,11 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text};
     transition: all 0.3s ease;
   }
+
+  .image-gallery {
+    height: 30vh;
+    width: auto;
+  }
 `;
 
 export default GlobalStyles;
